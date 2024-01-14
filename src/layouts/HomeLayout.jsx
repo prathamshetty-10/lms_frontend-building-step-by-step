@@ -2,6 +2,7 @@ import {FiMenu} from "react-icons/fi"
 import {AiFillCloseCircle} from "react-icons/ai"
 import {Link, useNavigate} from "react-router-dom"
 import Footer from "../components/footer";
+import { logout } from "../Redux/Slices/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
 function HomeLayout({children}){
     const dispatch=useDispatch();
@@ -24,13 +25,14 @@ function HomeLayout({children}){
         drawerSide[0].style.width=0;
         
     }
-    function handleLogout(e){
+    async function handleLogout(e){
         e.preventDefault();
-        //const res=await dispatch(logout());
+        const res=await dispatch(logout());
+        if(res?.payload?.success){
         
         navigate("/")//navigate to home page
 
-    }
+    }}
     return(
         <>
         <div className="min-h-[90vh]">
@@ -86,12 +88,12 @@ function HomeLayout({children}){
                     }
                     {isLoggedIn &&(
                         
-                        <div className="w-full ">
-                            <li className="border border-black bottom-4 rounded-md font-semibold hover:bg-blue-300 m-1">
-                                <Link to="/user/profile">user Profile</Link>
-                            </li>
-                            <button className="btn-secondary px-4 py-1 font-semibold rounded-md w-full m-1  bg-blue-500 hover:bg-blue-200 hover:text-blue-600">
-                                <Link onClick={handleLogout}>logout</Link>
+                        <div className="w-[90%] flex items-center absolute bottom-3 justify-center">
+                            <button className="border btn-secondary px-1 py-1 font-semibold rounded-md w-full m-1  bg-blue-500 hover:bg-blue-200 hover:text-blue-600">
+                                <Link to="/user/profile">User Profile</Link>
+                            </button>
+                            <button className="border btn-secondary px-1 py-1 font-semibold rounded-md w-full m-1  bg-blue-500 hover:bg-blue-200 hover:text-blue-600">
+                                <Link onClick={handleLogout}>Logout</Link>
                             </button>
                         </div>
                         
@@ -114,4 +116,4 @@ function HomeLayout({children}){
     )
 
 }
-export default HomeLayout;
+export default HomeLayout
