@@ -5,7 +5,40 @@ import Modi from "../assets/images/Modi.png"
 import SteveJobs from "../assets/images/SteveJobs.png"
 import MotherTeresa from "../assets/images/MotherTeresa.png"
 import BillGates from "../assets/images/BillGates.png"
+import CarousalSlide from "../components/CarousalSlide";
 function AboutUs(){
+    const celeb=[
+        {
+            title:"Narendra Modi",
+            desc:"Come to ayodya do the ram pooja shri ram will bless u with all his love and power",
+            image:Modi,
+            slideNumber:1
+        },
+        {
+            title:"Bill Gates",
+            desc:"i Made microsoft i am rich and i am very rich and i am super rich and also genenrous",
+            image:BillGates,
+            slideNumber:2
+        },
+        {
+            title:"Mother Teresa",
+            desc:"i support peace and love children i wear white everyday and i am very kind",
+            image:MotherTeresa,
+            slideNumber:3
+        },
+        {
+            title:"APJ Abdul Kalam",
+            desc:"I am kalam from poor backgroud i am muslim rocket scientist loved bvy all",
+            image:AbdulKalam,
+            slideNumber:4
+        },
+        {
+            title:"Steve Jobs",
+            desc:"i have a job that is to sell expensive phones make everyone poor",
+            image:SteveJobs,
+            slideNumber:5
+        },
+    ]
     return(
         <HomeLayout>
             <div className="pl-20 pt-20 flex flex-col text-white ">
@@ -28,63 +61,13 @@ function AboutUs(){
                 
                 
                 </div>
-                <div className="m-300"></div>
+                
                 <div className="carousel w-1/2 my-16 m-auto">
-                    <div id="slide1" className="carousel-item relative w-full">
-                        <div className="flex flex-col items-center justify-center gap-4 px-[15%] w-full">
-                            <img src={Modi} className="w-60 rounded-md border-2 border-gray-200" />
-                            <p className="text-xl text-gray-200 ">Come to ayodya do the ram pooja shri ram will bless u with all his love and power</p>
-                            <h3 className="text-2xl font-semibold">Narendra Modi</h3>
-                            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#slide5" className="btn btn-circle">❮</a> 
-                                <a href="#slide2" className="btn btn-circle">❯</a>
-                            </div>
-                        </div>
-                    </div> 
-                    <div id="slide2" className="carousel-item relative w-full">
-                        <div className="flex flex-col items-center justify-center gap-4 px-[15%]">
-                            <img src={BillGates} className="w-60 border-2 border-gray-200 rounded-md" />
-                            <p className="text-xl text-gray-200 ">i Made microsoft i am rich and i am very rich and i am super rich and also genenrous</p>
-                            <h3 className="text-2xl font-semibold">Bill Gates</h3>
-                            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#slide1" className="btn btn-circle">❮</a> 
-                                <a href="#slide3" className="btn btn-circle">❯</a>
-                            </div>
-                        </div>
-                    </div> 
-                    <div id="slide3" className="carousel-item relative w-full">
-                        <div className="flex flex-col items-center justify-center gap-4 px-[15%]">
-                            <img src={MotherTeresa} className="w-60 border-2 border-gray-200 rounded-md" />
-                            <p className="text-xl text-gray-200 ">i support peace and love children i wear white everyday and i am very kind</p>
-                            <h3 className="text-2xl font-semibold">Mother Teresa</h3>
-                            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#slide2" className="btn btn-circle">❮</a> 
-                                <a href="#slide4" className="btn btn-circle">❯</a>
-                            </div>
-                        </div>
-                    </div> 
-                    <div id="slide4" className="carousel-item relative w-full">
-                        <div className="flex flex-col items-center justify-center gap-4 px-[15%]">
-                            <img src={AbdulKalam} className="w-60 border-2 border-gray-200 rounded-md" />
-                            <p className="text-xl text-gray-200 ">I am kalam from poor backgroud i am muslim rocket scientist loved bvy all</p>
-                            <h3 className="text-2xl font-semibold">APJ Abdul Kalam</h3>
-                            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#slide3" className="btn btn-circle">❮</a> 
-                                <a href="#slide5" className="btn btn-circle">❯</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="slide5" className="carousel-item relative w-full">
-                        <div className="flex flex-col items-center justify-center gap-4 px-[15%]">
-                            <img src={SteveJobs} className="w-60 border-2 border-gray-200 rounded-md" />
-                            <p className="text-xl text-gray-200 ">i have a job that is to sell expensive phones make everyone poor</p>
-                            <h3 className="text-2xl font-semibold">Steve Jobs</h3>
-                            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#slide4" className="btn btn-circle">❮</a> 
-                                <a href="#slide1" className="btn btn-circle">❯</a>
-                            </div>
-                        </div>
-                    </div>
+                {celeb && celeb.map(celebr=><CarousalSlide 
+                    {...celebr} 
+                    key={celebr.slideNumber}
+                     totalslides={celeb.length}/>)}
+                    
                 </div>
             
             
