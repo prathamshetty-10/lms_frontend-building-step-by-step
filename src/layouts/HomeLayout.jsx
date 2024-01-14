@@ -44,40 +44,40 @@ function HomeLayout({children}){
                     
                     </label>
                 </div>
-                <div className="drawer-side w-0">
+                <div className="drawer-side w-0 bg-white">
                 {/*these are the contents within the side bar */}
                 <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-48 sm:w-80 bg-base-200 text-base-content ">
+                <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-gray-300 text-base-content ">
                     <li className="w-fit absolute right-2 z-50 ">
                         <button onClick={hideDrawer}>
                             <AiFillCloseCircle size={24}/>
                         </button>
                     </li>
-                    <li className="border border-black rounded-md font-semibold hover:bg-blue-300 m-1">
+                    <li className="border border-black rounded-md bg-white font-bold hover:bg-blue-200 m-1 hover:text-blue-600 hover:font-extrabold">
                         <Link to="/">Home</Link>
                     </li>
                     {isLoggedIn && role=="ADMIN" && (
-                        <li className="border border-black rounded-md font-semibold hover:bg-blue-300 m-1">
+                        <li className="border border-black rounded-md bg-white font-semibold hover:bg-blue-300 m-1">
                         <Link to="/admin/dashboard">Admin Dashboard</Link>
                         </li>
 
                     )}
-                    <li className="border border-black rounded-md font-semibold hover:bg-blue-300 m-1">
+                    <li className="border border-black bg-white rounded-md font-bold hover:bg-blue-200 m-1 hover:text-blue-600 hover:font-extrabold">
                         <Link to="/courses">All Courses</Link>
                     </li>
-                    <li className="border border-black rounded-md font-semibold hover:bg-blue-300 m-1">
+                    <li className="border border-black bg-white rounded-md font-bold hover:bg-blue-200 m-1 hover:text-blue-600 hover:font-extrabold">
                         <Link to="/contact">Contact us</Link>
                     </li>
-                    <li className="border border-black rounded-md font-semibold hover:bg-blue-300 m-1">
+                    <li className="border border-black bg-white rounded-md font-bold hover:bg-blue-200 m-1 hover:text-blue-600 hover:font-extrabold">
                         <Link to="/about">About us</Link>
                     </li>
                     {!isLoggedIn &&(
                         
-                        <div className="w-full flex items-center justify-center">
-                            <button className="btn-primary px-4 py-1 font-semibold rounded-md w-full m-1 bg-blue-500 hover:bg-blue-200 hover:text-blue-600">
+                        <div className="w-[90%] flex items-center absolute bottom-3 justify-center">
+                            <button className="border btn-secondary px-1 py-1 font-semibold rounded-md w-full m-1  bg-blue-500 hover:bg-blue-200 hover:text-blue-600">
                                 <Link to="/login">Login</Link>
                             </button>
-                            <button className="btn-secondary px-4 py-1 font-semibold rounded-md w-full m-1  bg-blue-500 hover:bg-blue-200 hover:text-blue-600">
+                            <button className="border btn-secondary px-1 py-1 font-semibold rounded-md w-full m-1  bg-blue-500 hover:bg-blue-200 hover:text-blue-600">
                                 <Link to="/signup">Signup</Link>
                             </button>
                         </div>
@@ -87,7 +87,7 @@ function HomeLayout({children}){
                     {isLoggedIn &&(
                         
                         <div className="w-full ">
-                            <li className="border border-black rounded-md font-semibold hover:bg-blue-300 m-1">
+                            <li className="border border-black bottom-4 rounded-md font-semibold hover:bg-blue-300 m-1">
                                 <Link to="/user/profile">user Profile</Link>
                             </li>
                             <button className="btn-secondary px-4 py-1 font-semibold rounded-md w-full m-1  bg-blue-500 hover:bg-blue-200 hover:text-blue-600">
@@ -97,9 +97,11 @@ function HomeLayout({children}){
                         
                     )
                     }
+                    
 
                 
                 </ul>
+                
                 </div>
             </div>
             {children}
