@@ -59,7 +59,7 @@ function HomeLayout({children}){
                         <Link to="/">Home</Link>
                     </li>
                     {isLoggedIn && role=="ADMIN" && (
-                        <li className="border border-black rounded-md bg-white font-semibold hover:bg-blue-300 m-1">
+                        <li className="border border-black bg-white rounded-md font-bold hover:bg-blue-200 m-1 hover:text-blue-600 hover:font-extrabold">
                         <Link to="/admin/dashboard">Admin Dashboard</Link>
                         </li>
 

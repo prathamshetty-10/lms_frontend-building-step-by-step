@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {toast} from "react-hot-toast";
 import { createAccount } from "../Redux/Slices/AuthSlice";
+import { login } from "../Redux/Slices/AuthSlice";
 
 function Signup(){
     const dispatch=useDispatch();
@@ -16,6 +17,10 @@ function Signup(){
         password:"",
         avatar:"",
     });
+    const[loginData,setLoginData]=useState({
+        email:"",
+        password:"",
+    })
     function handleUserInput(e){
         const {name,value}=e.target;
         setSignupData({
@@ -66,10 +71,19 @@ function Signup(){
         formData.append("email",signupData.email);
         formData.append("password",signupData.password);
         formData.append("avatar",signupData.avatar);
+        setLoginData({
+            ...loginData,
+            email:signupData.email,
+            password:signupData.password
+        })
         //dispatch create account action
         const response=await dispatch(createAccount(formData));
         if(response?.payload?.success){
+            const response=await dispatch(login(loginData));
+            if(response?.payload?.success){
             navigate("/");
+        }
+           
         }
         //once action is successful
         

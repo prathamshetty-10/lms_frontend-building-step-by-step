@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 function CourseCard({ data }){
     const navigate=useNavigate();//on clicking the card it takes to other page
     return(
-        <div onClick={()=>navigate("/course/description")} className="text-white w-[20rem] h-[400px] shadow-lg shadow-gray-800 rounded-lg cursor-pointer group overflow-hidden bg-zinc-700 hover:scale-105 mt-10" >
+        <div onClick={()=>navigate("/course/description",{state:{...data}})} className="text-white w-[20rem] h-[400px] shadow-lg shadow-gray-800 rounded-lg cursor-pointer group overflow-hidden bg-zinc-700 hover:scale-105 mt-10" >
             <div className="overflow-hidden " >
                 <img className="h-48 w-full rounded-tl-lg rounded-tr-lg transition-all ease-in-out duration-300" src={data?.thumbnail?.secure_url} alt="course thumbnail" />
                 <div className="p-3 space-y-1 text-white">
