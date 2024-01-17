@@ -64,6 +64,12 @@ function HomeLayout({children}){
                         </li>
 
                     )}
+                    {isLoggedIn && role=="ADMIN" && (
+                        <li className="border border-black bg-white rounded-md font-bold hover:bg-blue-200 m-1 hover:text-blue-600 hover:font-extrabold">
+                        <Link to="/course/create">Create courses</Link>
+                        </li>
+
+                    )}
                     <li className="border border-black bg-white rounded-md font-bold hover:bg-blue-200 m-1 hover:text-blue-600 hover:font-extrabold">
                         <Link to="/courses">All Courses</Link>
                     </li>
