@@ -6,7 +6,7 @@ import axiosInstance from "../../helpers/axiosInstance";
 const initialState={
     isLoggedIn:localStorage.getItem('isLoggedIn')|| false,
     role:localStorage.getItem("role")|| "",
-    data:JSON.parse(localStorage.getItem("data"))||{}
+    data:localStorage.getItem("data")!==undefined? JSON.parse(localStorage.getItem("data")):{}
 };//this is the initial state of the Auth slice
 export const createAccount=createAsyncThunk("/auth/signup",async(data)=>{
     try{
@@ -60,6 +60,35 @@ export const logout=createAsyncThunk("/auth/logout",async()=>{
 
     }
 } )
+export const updateProfile=createAsyncThunk("/user/update/profile",async(data)=>{//thunk takes only one parameter
+    try{
+        const res=axiosInstance.put(`user/update/${data[0]}`,data[1]);//this is the route given in backend
+        toast.promise(res,{
+            loading:"wait! profile update in progress",
+            success:"profile updated",
+            error:"Failed to update profile"
+        });
+        return (await res).data[1];
+
+
+    }catch(error){
+        toast.error(error?.response?.data?.message);//to send the error as alert message
+
+    }
+} )
+export const getUserData=createAsyncThunk("/user/details",async()=>{
+    try{
+        const res=axiosInstance.get("user/me");//this is the route given in backend
+        
+        return (await res).data;
+
+
+    }catch(error){
+        toast.error(error?.message);//to send the error as alert message
+
+    }
+    //once userdata becomes new and comes the state has to be updated as it has the user data so addcase in extrareducer
+} )
 //creating the Auth slice
 const authSlice=createSlice({
     name:"auth",
@@ -83,6 +112,18 @@ const authSlice=createSlice({
             state.data={};
             state.isLoggedIn=false;
             state.role="";
+        })
+        .addCase(getUserData.fulfilled,(state,action)=>{
+            if(!action?.payload?.user)return;
+            localStorage.setItem("data",JSON.stringify(action?.payload?.user));
+            localStorage.setItem("isLoggedIn",true);
+            localStorage.setItem("role",action?.payload?.user?.role);
+            //localstorage is updated so incase the app reloads initial state will be set with these
+            //now update the current state as u didnt reload
+            state.isLoggedIn=true;
+            state.data=action?.payload?.user;
+            state.role=action?.payload?.user?.role;
+
         })
     }
 })
