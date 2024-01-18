@@ -1,12 +1,14 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
 import { useSelector } from "react-redux";
 
 function CourseDescription(){
     const locator=useLocation();
+    const Navigate=useNavigate();
     
     const {role,data}=useSelector((state)=>state.auth);
+    const isVerified=useSelector((state)=>state.razorpay.isPaymentVerified);
     return(
         <HomeLayout>
             <div className="min-h-[90vh] pt-12 px-20 flex flex-col items-center justify-center text-white">
@@ -34,13 +36,13 @@ function CourseDescription(){
                         
                             </div>
                             {
-                                role=="ADMIN" || data?.subscription?.status=="ACTIVE"?(
+                                role=="ADMIN" ||  data?.subscription?.status=="active" ?(
                                     <button className="bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-400 transition-all ease-in-out duration-300">
                                         watch lectures
                                     
                                     </button>
                                 ):(
-                                    <button className="bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-400 transition-all ease-in-out duration-300">
+                                    <button onClick={()=>Navigate("/checkout")} className="bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-400 transition-all ease-in-out duration-300">
                                         subscribe
                                     </button>
                                 )
