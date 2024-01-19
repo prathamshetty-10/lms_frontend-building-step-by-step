@@ -31,7 +31,8 @@ return(
             <div className="text-center text-2xl font-semibold text-yellow-500 ">
                 Course Name:{state?.title}
             </div>
-            {lectures &&  lectures.length>0 && <div className="flex justify-center gap-10 w-full ">
+            {(lectures &&  lectures.length>0)?
+                (<div className="flex justify-center gap-10 w-full ">
                 {/*left section for videos and course details for admin */}
                 <div className="py-5 space-y-5 w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black]">
                 
@@ -54,7 +55,8 @@ return(
                         <span className="text-yellow-500 ">
                             Description:{" "}
                         </span>
-                        {lectures[currentVideo]?.description}
+                        <div>
+                        {lectures[currentVideo]?.description}</div>
                         </p>
                     </div>
                 </div>
@@ -95,7 +97,12 @@ return(
                 
                 
                 </ul>
-            </div>}
+            </div>):( 
+                role && role==="ADMIN"&&(
+                <button onClick={()=>navigate("/course/addLecture",{state:{...state}})} className="hover:bg-yellow-300 border text-black bg-yellow-500 px-2 py-1 rounded-md  text-s,">
+                Add new lecture
+                </button>
+            ))}
         </div>
     
     </HomeLayout>
